@@ -28,6 +28,8 @@ def linux_setup():
 
 def windows_setup():
     print("Windows setup")
+    run("git submodule update --init --recursive")
+    run("pip install conan")
 
 def mac_setup():
     print("Mac setup")
