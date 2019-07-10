@@ -28,7 +28,7 @@ clone(".shell",      shell_path)
 clone("build_tools", build_tools_path)
 
 os.environ["PATH"]       += shell_path
-#os.environ["PYTHONPATH"]  = build_tools_path
+os.environ["PYTHONPATH"]  = build_tools_path
 
 run("export PYTHONPATH=${PYTHONPATH}:" + build_tools_path)
 run("echo ${PYTHONPATH}")
