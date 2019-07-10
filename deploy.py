@@ -27,8 +27,7 @@ def clone(rep, destination = ""):
 clone(".shell", shell_path)
 clone("build_tools", build_tools_path)
 
-run(python_cmd + shell_path + "addpath.py " + shell_path)
-run(python_cmd + shell_path + "addpypath.py " + build_tools_path)
+os.environ["PATH"]       += shell_path
+os.environ["PYTHONPATH"] += build_tools_path
 
-        
 print(home)
