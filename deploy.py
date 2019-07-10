@@ -7,9 +7,6 @@ is_windows = platform.system() == "Windows"
 is_mac     = platform.system() == "Darwin"
 is_linux   = platform.system() == "Linux"
 
-python_cmd = "py "  if is_windows else "python3 "
-pip_cmd    = "pip " if is_windows else "pip3 "
-
 home             = os.path.expanduser("~/")
 build_tools_path = home + ".deps/build_tools/"
 shell_path       = home + ".shell/"
@@ -34,15 +31,16 @@ def windows_setup():
 
 def mac_setup():
     print("Mac setup")
+    run("pip3 install conan")
     
 clone(".shell",      shell_path)
 clone("build_tools", build_tools_path)
 
 if is_windows:
     windows_setup()
-else if is_mac:
+elif is_mac:
     mac_setup()
-else if is_linux:
+elif is_linux:
     linux_setup()
 else:
     print("Unknown os")
