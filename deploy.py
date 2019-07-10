@@ -31,5 +31,7 @@ os.environ["PATH"]       += shell_path
 #os.environ["PYTHONPATH"]  = build_tools_path
 
 run("export PYTHONPATH=${PYTHONPATH}:" + build_tools_path)
+run("echo ${PYTHONPATH}")
+run("echo ${PATH}")
 
 print(home)
