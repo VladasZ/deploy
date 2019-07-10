@@ -1,15 +1,35 @@
+#!/usr/bin/env python3
+
 import os
-import subprocess
-import urllib.request
+import platform
 
-if not os.path.isfile("helper.py"):
-	urllib.request.urlretrieve("https://raw.githubusercontent.com/VladasZ/shell/master/helper.py", "helper.py")
-	subprocess.call("deploy.py", shell=True)
-	exit()
-else:
-	import helper
+is_windows = platform.system() == "Windows"
+is_mac     = platform.system() == "Darwin"
+is_linux   = platform.system() == "Linux"
 
-run=helper.run
+python_cmd = "py "  if is_windows else "python3 "
+pip_cmd    = "pip " if is_windows else "pip3 "
 
-run('pip install cmake')
+home = os.path.expanduser("~/")
+deps_path = home + ".deps/"
+build_tools_path = deps_path + "build_tools/"
+shell_path = home + ".shell/"
 
+def run(string):
+    print(string)
+    if os.system(string):
+        print("Shell script has failed")
+        exit()
+
+def clone(rep, destination = ""):
+    run("git clone --recursive https://github.com/vladasz/" + rep + " " + destination)
+
+
+clone(".shell", shell_path)
+clone("build_tools", build_tools_path)
+
+run(python_cmd + shell_path + "addpath.py " + shell_path)
+run(python_cmd + "addpypath " + build_tools_path)
+
+        
+print(home)
