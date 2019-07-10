@@ -29,9 +29,11 @@ clone("build_tools", build_tools_path)
 
 os.environ["PATH"]       += shell_path
 os.environ["PYTHONPATH"]  = build_tools_path
+os.environ["PYTHON3PATH"]  = build_tools_path
 
 run("export PYTHONPATH=${PYTHONPATH}:" + build_tools_path)
 run("echo ${PYTHONPATH}")
+run("echo ${PYTHON3PATH}")
 run("echo ${PATH}")
 run("ls " + build_tools_path)
 
