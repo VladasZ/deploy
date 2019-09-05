@@ -29,21 +29,21 @@ def copy_conan_profile():
 
 def linux_setup():
     print("Linux setup")
-    copy_conan_profile()
     run("sudo apt install python3-pip")
     run("sudo apt install python3-setuptools")
     run("sudo pip3 install conan")
+    copy_conan_profile()
 
 def windows_setup():
     print("Windows setup")
-    copy_conan_profile()
     run("git submodule update --init --recursive")
     run("pip install conan")
+    copy_conan_profile()
 
 def mac_setup():
     print("Mac setup")
-    copy_conan_profile()
     run("pip3 install conan")
+    copy_conan_profile()
 
 if is_windows:
     windows_setup()
