@@ -24,6 +24,7 @@ def clone(rep, destination = ""):
 
 def linux_setup():
     print("Linux setup")
+    run("sudo apt update")
     run("sudo apt install python3-pip")
     run("sudo apt install python3-setuptools")
     run("sudo pip3 install conan")
