@@ -27,6 +27,7 @@ def linux_setup():
     run("sudo apt update")
     run("sudo apt install python3-pip")
     run("sudo apt install python3-setuptools")
+    run("sudo pip3 install setuptools -U")
     run("sudo pip3 install conan")
     run("sudo pip3 install wheel")
 
