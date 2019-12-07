@@ -26,14 +26,12 @@ def linux_setup():
     print("Linux setup")
     run("sudo apt update")
     run("sudo apt install python3-pip")
-    run("sudo apt install python3-setuptools")
     run("sudo pip3 install setuptools -U")
     run("sudo pip3 install conan")
     run("sudo pip3 install wheel")
 
 def windows_setup():
     print("Windows setup")
-    run("git submodule update --init --recursive")
     run("pip install conan")
 
 def mac_setup():
