@@ -29,7 +29,7 @@ def linux_setup():
     run("sudo pip3 install setuptools -U")
     run("sudo pip3 install conan")
     run("sudo pip3 install wheel")
-    run("export PYTHONPATH=\"${PYTHONPATH}:" + build_tools_path + "\""
+    run("export PYTHONPATH=\"${PYTHONPATH}:" + build_tools_path + "\"")
 
 def windows_setup():
     print("Windows setup")
