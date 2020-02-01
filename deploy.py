@@ -28,7 +28,7 @@ def linux_setup():
   ##  run("sudo apt-get install python3")
     run("sudo apt-get install python3-pip")
     run("sudo pip3 install setuptools -U")
-    run("sudo pip3 install conan")
+    run("sudo pip install conan")
     run("sudo pip3 install wheel")
     run("export PYTHONPATH=\"${PYTHONPATH}:" + build_tools_path + "\"")
 
