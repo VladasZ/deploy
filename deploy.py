@@ -24,15 +24,9 @@ def clone(rep, destination = ""):
 
 def linux_setup():
     print("Linux setup")
-
-    run("sudo add-apt-repository ppa:jonathonf/python-3.6")
     run("sudo apt-get update")
-    run("sudo apt-get install python3.6")
-    run("sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.5 1")
-    run("sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 2")
-    run("sudo update-alternatives --config python3")
-    run("python3 -V")
-    run("sudo apt-get install python3-pip")
+  ##  run("sudo apt-get install python3")
+  ##  run("sudo apt-get install python3-pip")
     run("sudo pip3 install setuptools -U")
     run("sudo pip3 install conan")
     run("sudo pip3 install wheel")
