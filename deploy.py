@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import os
-import shutil
 import platform
 
 is_windows = platform.system() == "Windows"
@@ -12,33 +11,39 @@ home             = os.path.expanduser("~/")
 build_tools_path = home + ".deps/build_tools/"
 shell_path       = home + ".shell/"
 
+
 def run(string):
     print(string)
     if os.system(string):
         print("Shell script has failed")
         exit()
 
+
 def clone(rep, destination = ""):
-	if not os.path.exists(destination):
-		run("git clone --recursive https://github.com/vladasz/" + rep + " " + destination)
+    if not os.path.exists(destination):
+        run("git clone --recursive https://github.com/vladasz/" + rep + " " + destination)
+
 
 def linux_setup():
     print("Linux setup")
     run("sudo apt-get update")
-  ##  run("sudo apt-get install python3")
     run("sudo apt-get install python3-pip")
+    run("sudo apt-get install libgl1-mesa-dev")
     run("sudo pip3 install setuptools -U")
     run("sudo pip install conan")
     run("sudo pip install wheel")
     run("export PYTHONPATH=\"${PYTHONPATH}:" + build_tools_path + "\"")
 
+
 def windows_setup():
     print("Windows setup")
     run("pip install conan")
 
+
 def mac_setup():
     print("Mac setup")
     run("pip3 install conan")
+
 
 if is_windows:
     windows_setup()
@@ -48,6 +53,6 @@ elif is_linux:
     linux_setup()
 else:
     print("Unknown os")
-    
+
 clone(".shell",      shell_path)
 clone("build_tools", build_tools_path)
