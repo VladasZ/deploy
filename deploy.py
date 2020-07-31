@@ -29,6 +29,7 @@ def linux_setup():
     run("sudo apt-get update")
     run("sudo apt-get install python3-pip")
     run("sudo apt-get install libgl1-mesa-dev")
+    run("sudo apt-get install libgl1-mesa-dri")
     run("sudo pip3 install setuptools -U")
     run("sudo pip install conan")
     run("sudo pip install wheel")
