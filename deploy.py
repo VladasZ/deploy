@@ -34,6 +34,7 @@ def linux_setup():
     run("sudo pip install conan")
     run("sudo pip install wheel")
     run("export PYTHONPATH=\"${PYTHONPATH}:" + build_tools_path + "\"")
+    run("gcc --version")
 
 
 def windows_setup():
@@ -44,6 +45,7 @@ def windows_setup():
 def mac_setup():
     print("Mac setup")
     run("pip3 install conan")
+    run("clang --version")
 
 
 if is_windows:
