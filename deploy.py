@@ -1,15 +1,34 @@
 #!/usr/bin/env python3
 
 import os
+import shutil
 import platform
 
 is_windows = platform.system() == "Windows"
 is_mac     = platform.system() == "Darwin"
 is_linux   = platform.system() == "Linux"
 
-home             = os.path.expanduser("~/")
-build_tools_path = home + ".deps/build_tools/"
-shell_path       = home + ".shell/"
+unix = is_mac or is_linux
+
+
+def _get_home():
+    if "HOME" in os.environ:
+        return os.environ["HOME"]
+    return os.path.expanduser("~")
+    
+
+home = _get_home()
+
+build_tools_path = home + "/.deps/build_tools/"
+shell_path       = home + "/.shell/"
+
+
+def copy(src, dst):
+    print("Copying:\n" + src + " to:\n" + dst)
+    if os.path.isfile(src):
+        shutil.copyfile(src, dst)
+    else:
+        shutil.copytree(src, dst)
 
 
 def run(string):
@@ -24,38 +43,17 @@ def clone(rep, destination = ""):
         run("git clone --recursive https://github.com/vladasz/" + rep + " " + destination)
 
 
-def linux_setup():
-    print("Linux setup")
-    run("sudo apt-get update")
-    run("sudo apt-get install python3-pip")
-    run("sudo apt-get install libgl1-mesa-dev")
-    run("sudo apt-get install libgl1-mesa-dri")
-    run("sudo pip3 install setuptools -U")
-    run("sudo pip install conan")
-    run("sudo pip install wheel")
-    run("export PYTHONPATH=\"${PYTHONPATH}:" + build_tools_path + "\"")
-    run("gcc --version")
+def alacrittyPath():
+    if unix:
+        return home + "/.alacritty.yml" 
+    return os.environ["APPDATA"] + "\alacritty\alacritty.yml"
 
 
-def windows_setup():
-    print("Windows setup")
-    run("pip install conan")
+def setup_alacritty():
+    copy(shell_path + "alacritty.yml", alacrittyPath())
 
-
-def mac_setup():
-    print("Mac setup")
-    run("pip3 install conan")
-    run("clang --version")
-
-
-if is_windows:
-    windows_setup()
-elif is_mac:
-    mac_setup()
-elif is_linux:
-    linux_setup()
-else:
-    print("Unknown os")
 
 clone(".shell",      shell_path)
 clone("build_tools", build_tools_path)
+
+setup_alacritty()
