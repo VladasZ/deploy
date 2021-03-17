@@ -45,8 +45,9 @@ def clone(rep, destination = ""):
 
 def alacrittyPath():
     if unix:
-        return home + "/.alacritty.yml" 
-    return os.environ["APPDATA"] + "\alacritty\alacritty.yml"
+        return home + "/.alacritty.yml"
+    print(os.environ["APPDATA"])
+    return os.environ["APPDATA"] + "/alacritty/alacritty.yml"
 
 
 def setup_alacritty():
