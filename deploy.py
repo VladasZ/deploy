@@ -21,6 +21,7 @@ home = _get_home()
 
 build_tools_path = home + "/.deps/build_tools/"
 shell_path       = home + "/.shell/"
+deploy_path      = home + "/deploy"
 
 
 def copy(src, dst):
@@ -43,15 +44,28 @@ def clone(rep, destination = ""):
         run("git clone --recursive https://github.com/vladasz/" + rep + " " + destination)
 
 
-def alacrittyPath():
+def alacrittyTargetPath():
     if unix:
         return home + "/.alacritty.yml"
     print(os.environ["APPDATA"])
     return os.environ["APPDATA"] + "/alacritty/alacritty.yml"
 
 
+def alacrittyLocalPath():
+    suffix = ""
+    if is_mac:
+        suffix = "mac"
+    elif is_linux:
+        suffix = "lin"
+    elif is_windows:
+        suffix = "win"
+    else:
+        raise Exception("Unknown os")
+    return deploy_path + "/alacritty/alacritty_" + suffix + ".yml"
+
+
 def setup_alacritty():
-    copy(shell_path + "alacritty.yml", alacrittyPath())
+    copy(alacrittyLocalPath(), alacrittyTargetPath())
 
 
 clone(".shell",      shell_path)
