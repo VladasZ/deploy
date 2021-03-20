@@ -68,6 +68,40 @@ def setup_alacritty():
     copy(alacrittyLocalPath(), alacrittyTargetPath())
 
 
+def linux_setup():
+    print("Linux setup")
+    run("sudo apt-get update")
+    run("sudo apt-get install python3-pip")
+    run("sudo apt-get install libgl1-mesa-dev")
+    run("sudo apt-get install libgl1-mesa-dri")
+    run("sudo pip3 install setuptools -U")
+    run("sudo pip install conan")
+    run("sudo pip install wheel")
+    run("export PYTHONPATH=\"${PYTHONPATH}:" + build_tools_path + "\"")
+    run("gcc --version")
+
+
+def windows_setup():
+    print("Windows setup")
+    run("pip install conan")
+
+
+def mac_setup():
+    print("Mac setup")
+    run("pip3 install conan")
+    run("clang --version")
+
+
+if is_windows:
+    windows_setup()
+elif is_mac:
+    mac_setup()
+elif is_linux:
+    linux_setup()
+else:
+    print("Unknown os")
+
+
 clone(".shell",      shell_path)
 clone("build_tools", build_tools_path)
 
