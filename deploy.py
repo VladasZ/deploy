@@ -71,4 +71,4 @@ def setup_alacritty():
 clone(".shell",      shell_path)
 clone("build_tools", build_tools_path)
 
-setup_alacritty()
+#setup_alacritty()
